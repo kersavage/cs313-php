@@ -1,0 +1,19 @@
+CREATE DATABASE rexburgEvents;
+
+\c rexburgEvents
+
+CREATE TABLE public.users
+(
+	id SERIAL NOT NULL PRIMARY KEY,
+	username VARCHAR(100) NOT NULL UNIQUE,
+	password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE public.event
+(
+	id SERIAL NOT NULL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	date date NOT NULL,
+	description TEXT,
+	username VARCHAR(100) NOT NULL
+);
