@@ -1,9 +1,9 @@
 <?php
 /**********************************************************
-* File: addEvent.php
+* File: editEvent.php
 * Author: Kylor Kersavage
 * 
-* Description: Retrieves data from a form to add to the event database
+* Description: Allows you to edit an event
 ***********************************************************/
 
 require("dbConnect.php");
@@ -48,6 +48,10 @@ $db = get_db();
 			<ul>
 				<li><a href="RexburgEvents.php">Rexburg Events</a></li>
 				<li><a href="addEvent.php">Create Event</a></li>
+				<?php
+				if($username != "")
+					echo '<li><a href="myEvents.php">MY EVENTS</a></li>';
+				?>
 				<li><a href="about.html">About</a></li>
 				<li style="float:right"><a class ="active" href="signIn.php">Sign In</a></li>
 				
@@ -56,14 +60,10 @@ $db = get_db();
 	</header>
 
 <div class="content">
-<h1>Fill out the form to add an event</h1><br /><hr>
-<form id="mainForm" onSubmit="return checkdate(this.date)" action="insertEvent.php" method="POST">
+<h1>Fill out the form to edit or delete your event</h1><br /><hr>
+<form id="mainForm" onSubmit="return checkdate(this.date)" action="updateEvent.php" method="POST">
 
-	<label for="username">Your User Name</label><br />
-	<input type="text" id="username" name="username" required></input>
-	<br /><br />
-
-	<label for="name">Event Name</label><br />
+	<label for="name">Event Name (must match one of your events)</label><br />
 	<input type="text" id="name" name="name" required></input>
 	<br /><br />
 
@@ -75,7 +75,7 @@ $db = get_db();
 	<textarea id="description" name="description" rows="4" cols="50" required></textarea>
 	<br /><br />
 
-	<input type="submit" value="Create Event" />
+	<input type="submit" value="Update Event" /><input type=button onClick="location.href='delete.php'" value='Delete Event'>
 
 </form>
 </div>

@@ -8,6 +8,19 @@
 // get the data from addUser.php
 $username = $_POST['username'];
 $pass = $_POST['pass'];
+echo '<p>The password is' . $pass;
+if (!isset($username) || $username == ""
+	|| !isset($pass) || $pass == "")
+{
+	header("Location: newUser.php");
+	die();
+}
+
+$username = htmlspecialchars($username);
+
+// Get the hashed password.
+$hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+
 
 require("dbConnect.php");
 $db = get_db();
@@ -19,7 +32,7 @@ try
 
 	// bind values to placeholders
 	$statement->bindValue(':username', $username);
-	$statement->bindValue(':pass', $pass);
+	$statement->bindValue(':pass', $hashedPassword);
 	$statement->execute();
 }
 

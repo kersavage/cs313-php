@@ -40,16 +40,16 @@ $db = get_db();
 </header>
 
 <div class="content">
-
-	<h1>Current Events in Rexburg</h1><br /><hr>
+	<h1>My Events</h1><br />
+	<p>Click <a href="editEvent.php">HERE</a> to edit your events.</p><hr>
 
 <?php
-echo '<h3>Welcome ' . $username . '<hr>';
-
+	echo '<h3>Username: ' . $username . '<hr>';
+ 
 try
 {
 	
-	$statement = $db->prepare('SELECT id, name, date, description, username FROM event');
+	$statement = $db->prepare("SELECT id, name, date, description, username FROM event Where username='$username'");
 	$statement->execute();
 
 	// Display each event from the database
